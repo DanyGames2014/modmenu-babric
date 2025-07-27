@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "modmenu",
+  "version": "${version}",
+
+  "name": "Template",
+  "description": "",
+  "authors": [
+    "DanyGames2014"
+  ],
+
+  "license": "MIT",
+  "icon": "assets/modmenu/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client" : [
+      "io.github.prospector.modmenu.ModMenu"
+    ],
+    "stationapi:event_bus": [
+    ],
+    "stationapi:event_bus_client": [
+    ],
+    "stationapi:event_bus_server": [
+    ]
+  },
+  "accessWidener": "modmenu.accesswidener",
+  "mixins": [
+    "modmenu.mixins.json"
+  ],
+
+  "depends": {
+    "minecraft": "1.0.0-beta.7.3"
+  },
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/class_34": [
+        "io/github/prospector/modmenu/util/TextRendererHelper"
+      ]
+    },
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/JbRbRf62pn"
+      }
+    }
+  }
+}

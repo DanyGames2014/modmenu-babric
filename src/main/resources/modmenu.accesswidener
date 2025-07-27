@@ -1,0 +1,22 @@
+accessWidener v2 named
+
+accessible field net/minecraft/client/Minecraft INSTANCE Lnet/minecraft/client/Minecraft;
+accessible field net/minecraft/client/resource/language/TranslationStorage translations Ljava/util/Properties;
+accessible field net/minecraft/client/gui/widget/ButtonWidget width I
+accessible field net/minecraft/client/gui/widget/ButtonWidget height I
+accessible field net/minecraft/client/gui/widget/EntryListWidget right I
+mutable field net/minecraft/client/gui/widget/EntryListWidget right I
+accessible field net/minecraft/client/gui/widget/EntryListWidget left I
+mutable field net/minecraft/client/gui/widget/EntryListWidget left I
+accessible field net/minecraft/client/gui/widget/EntryListWidget width I
+accessible field net/minecraft/client/gui/widget/EntryListWidget headerHeight I
+accessible field net/minecraft/client/gui/widget/EntryListWidget time J
+accessible field net/minecraft/client/gui/widget/EntryListWidget scrollSpeedMultiplier F
+accessible field net/minecraft/client/gui/widget/EntryListWidget mostYStart F
+accessible method net/minecraft/client/gui/widget/EntryListWidget clampScrolling ()V
+accessible field net/minecraft/client/gui/widget/EntryListWidget pos I
+accessible field net/minecraft/client/gui/widget/EntryListWidget scrollAmount F
+accessible field net/minecraft/client/gui/widget/EntryListWidget minecraft Lnet/minecraft/client/Minecraft;
+accessible field net/minecraft/client/gui/widget/EntryListWidget renderHeader Z
+accessible field net/minecraft/client/gui/widget/EntryListWidget height I
+accessible field net/minecraft/client/gui/widget/EntryListWidget renderSelectionHighlight Z
