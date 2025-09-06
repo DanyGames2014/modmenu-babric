@@ -42,8 +42,7 @@ modmenu.modIdToolTip=Mod ID: %s
 modmenu.authorPrefix=By %s
 modmenu.config=Edit Config
 modmenu.configure=Configure...
-modmenu.configure.error=Failed to load config screen for '%s'
-Report to '%s', not Mod Menu
+modmenu.configure.error=Failed to load config screen for '%s' Report to '%s', not Mod Menu
 modmenu.website=Website
 modmenu.issues=Issues
 modmenu.credits=Credits:

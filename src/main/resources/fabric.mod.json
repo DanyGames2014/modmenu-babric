@@ -3,7 +3,7 @@
   "id": "modmenu",
   "version": "${version}",
 
-  "name": "Template",
+  "name": "ModMenu Babric",
   "description": "",
   "authors": [
     "DanyGames2014"
@@ -15,13 +15,16 @@
   "environment": "*",
   "entrypoints": {
     "client" : [
-      "io.github.prospector.modmenu.ModMenu"
+      "net.danygames2014.modmenu.ModMenu"
     ],
     "stationapi:event_bus": [
     ],
     "stationapi:event_bus_client": [
     ],
     "stationapi:event_bus_server": [
+    ],
+    "modmenu": [
+      "net.danygames2014.modmenu.ModMenuModMenuCompat"
     ]
   },
   "accessWidener": "modmenu.accesswidener",
@@ -35,12 +38,12 @@
   "custom": {
     "loom:injected_interfaces": {
       "net/minecraft/class_34": [
-        "io/github/prospector/modmenu/util/TextRendererHelper"
+        "net/danygames2014/modmenu/util/TextRendererHelper"
       ]
     },
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://discord.gg/JbRbRf62pn"
+        "modmenu.discord": ""
       }
     }
   }
