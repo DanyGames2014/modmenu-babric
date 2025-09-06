@@ -20,7 +20,7 @@ public class TranslationStorageMixin {
     public void loadModMenuTranslations(CallbackInfo ci) {
         if (!FabricLoader.getInstance().isModLoaded("stationapi")) {
             try {
-                translations.load(TranslationStorage.class.getResourceAsStream("/assets/modmenu/lang/en_US.lang"));
+                translations.load(TranslationStorage.class.getResourceAsStream("/assets/modmenu/stationapi/lang/en_US.lang"));
             } catch (IOException e) {
                 System.err.println("Failed to load ModMenu translations:");
             }
