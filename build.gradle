@@ -20,6 +20,9 @@ java {
 
 loom {
 	accessWidenerPath = file("src/main/resources/modmenu.accesswidener")
+    mixin {
+        useLegacyMixinAp = false
+    }
 }
 
 repositories {
@@ -84,60 +87,62 @@ dependencies {
     implementation "org.slf4j:slf4j-api:1.8.0-beta4"
     implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.17.2"
     implementation "me.carleslc:Simple-Yaml:1.8.4"
+    implementation("com.google.guava:guava:33.2.1-jre")
+    implementation("com.google.code.gson:gson:2.9.0")
 
-    modImplementation ("net.modificationstation:StationAPI:${project.stapi_version}") {
-        exclude group: "babric", module: "fabric-loader"
-    }
+//    modImplementation ("net.modificationstation:StationAPI:${project.stapi_version}") {
+//        exclude group: "babric", module: "fabric-loader"
+//    }
 
-    modImplementation("net.glasslauncher.mods:glass-networking:${project.glass_networking_version}") {
-        transitive false
-    }
+//    modImplementation("net.glasslauncher.mods:glass-networking:${project.glass_networking_version}") {
+//        transitive false
+//    }
+//
+//    modImplementation("net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}") {
+//        transitive false
+//    }
 
-    modImplementation("net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}") {
-        transitive false
-    }
+//    modImplementation("net.glasslauncher.mods:AlwaysMoreItems:${project.alwaysmoreitems_version}") {
+//        transitive false
+//    }
 
-    modImplementation("net.glasslauncher.mods:AlwaysMoreItems:${project.alwaysmoreitems_version}") {
-        transitive false
-    }
+//    modImplementation("maven.modrinth:retrocommands:${project.retrocommands_version}-b1.7.3") {
+//        transitive false
+//    }
 
-    modImplementation("maven.modrinth:retrocommands:${project.retrocommands_version}-b1.7.3") {
-        transitive false
-    }
-
-    modImplementation("net.danygames2014:spawneggs:${project.spawneggs_version}") {
-        transitive false
-    }
-
-    modImplementation("maven.modrinth:bh-creative:${project.bhcreative_version}-b1.7.3") {
-        transitive false
-    }
+//    modImplementation("net.danygames2014:spawneggs:${project.spawneggs_version}") {
+//        transitive false
+//    }
+//
+//    modImplementation("maven.modrinth:bh-creative:${project.bhcreative_version}-b1.7.3") {
+//        transitive false
+//    }
 
     modRuntimeOnly("maven.modrinth:retroauth:${project.retroauth_version}-b1.7.3") {
         transitive false
     }
 
-    modRuntimeOnly("maven.modrinth:unitweaks:${project.unitweaks_version}-b1.7.3") {
-        transitive false
-    }
+//    modRuntimeOnly("maven.modrinth:unitweaks:${project.unitweaks_version}-b1.7.3") {
+//        transitive false
+//    }
 
-    modImplementation("net.danygames2014:WhatsThis:${project.whatsthis_version}") {
-        transitive false
-    }
-
-    if (project.hasProperty("nyalib_version")) {
-        modImplementation("net.danygames2014:NyaLib:${project.nyalib_version}")
-    }
-
-    if (project.hasProperty("uniwrench_version")) {
-        modImplementation("net.danygames2014:UniWrench:${project.uniwrench_version}") {
-            transitive false
-        }
-    }
-
-    modRuntimeOnly("maven.modrinth:fast-stapi-intro:2.0.0-b1.7.3") {
-        transitive false
-    }
+//    modImplementation("net.danygames2014:WhatsThis:${project.whatsthis_version}") {
+//        transitive false
+//    }
+//
+//    if (project.hasProperty("nyalib_version")) {
+//        modImplementation("net.danygames2014:NyaLib:${project.nyalib_version}")
+//    }
+//
+//    if (project.hasProperty("uniwrench_version")) {
+//        modImplementation("net.danygames2014:UniWrench:${project.uniwrench_version}") {
+//            transitive false
+//        }
+//    }
+//
+//    modRuntimeOnly("maven.modrinth:fast-stapi-intro:2.0.0-b1.7.3") {
+//        transitive false
+//    }
 }
 
 configurations.configureEach {

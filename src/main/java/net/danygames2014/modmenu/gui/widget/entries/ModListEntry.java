@@ -1,6 +1,7 @@
 package net.danygames2014.modmenu.gui.widget.entries;
 
 import java.awt.image.BufferedImage;
+import java.nio.BufferOverflowException;
 
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -127,12 +128,14 @@ public class ModListEntry extends DrawContext implements ModMenuEntryListWidget.
 	public void bindIconTexture() {
 		if (this.iconGlId == null) {
 			BufferedImage icon = mod.getIcon(list.getFabricIconHandler(), 64 * this.client.options.guiScale);
-			if (icon != null) {
-				this.iconGlId = this.client.textureManager.load(icon);
-			} else {
-				this.iconGlId = this.client.textureManager.getTextureId(UNKNOWN_ICON);
-			}
-		}
+
+            try {
+                this.iconGlId = this.client.textureManager.load(icon);
+            } catch (BufferOverflowException e) {
+                this.iconGlId = this.client.textureManager.getTextureId(UNKNOWN_ICON);
+            }
+        }
+        
 		this.client.textureManager.bindTexture(this.iconGlId);
 	}
 

@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "ModMenu Babric",
-  "description": "",
+  "description": "Adds the list of mods that you are looking at right now",
   "authors": [
     "DanyGames2014"
   ],
