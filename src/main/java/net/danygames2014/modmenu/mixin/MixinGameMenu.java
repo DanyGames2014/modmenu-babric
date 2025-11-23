@@ -6,9 +6,12 @@ import net.danygames2014.modmenu.config.ModMenuConfig;
 import net.danygames2014.modmenu.gui.ModsScreen;
 import net.danygames2014.modmenu.gui.widget.ModMenuButtonWidget;
 
+import net.danygames2014.modmenu.gui.widget.UpdateCheckerTexturedButtonWidget;
 import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.pack.PackScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.resource.language.TranslationStorage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -64,8 +67,15 @@ public abstract class MixinGameMenu extends Screen {
 			}
 			if (modsButtonIndex != -1) {
 				if (style == ModMenuConfig.GameMenuButtonStyle.ICON) {
+					this.buttons.add(new UpdateCheckerTexturedButtonWidget(MODS, modsButtonX, modsButtonY, modsButtonWidth, modsButtonHeight, 0, 0, 20, FABRIC_ICON_BUTTON_LOCATION, 32, 64));
+					this.buttons.add(new ButtonWidget(MODS + 1, this.width / 2 - 100, this.height / 4 + 56, TranslationStorage.getInstance().get("menu.mods")));
 				} else {
 					this.buttons.add(new ModMenuButtonWidget(MODS, modsButtonX, modsButtonY, modsButtonWidth, modsButtonHeight, ModMenuApi.createModsButtonText()));
+					if(style == ModMenuConfig.GameMenuButtonStyle.BELOW_ACHIEVEMENTS) {
+						this.buttons.add(new ButtonWidget(MODS + 1, this.width / 2 + 2, modsButtonY, modsButtonWidth, modsButtonHeight, TranslationStorage.getInstance().get("menu.mods")));
+					} else if(style == ModMenuConfig.GameMenuButtonStyle.BELOW_STATISTICS) {
+						this.buttons.add(new ButtonWidget(MODS + 1, this.width / 2 - 100, modsButtonY, modsButtonWidth, modsButtonHeight, TranslationStorage.getInstance().get("menu.mods")));
+					}
 				}
 			}
 		}
@@ -75,6 +85,8 @@ public abstract class MixinGameMenu extends Screen {
 	private void onButtonClicked(ButtonWidget button, CallbackInfo ci) {
 		if (button.id == MODS) {
 			this.minecraft.setScreen(new ModsScreen(this));
+		} else if(button.id == MODS + 1) {
+			this.minecraft.setScreen(new PackScreen(this));
 		}
 	}
 }
