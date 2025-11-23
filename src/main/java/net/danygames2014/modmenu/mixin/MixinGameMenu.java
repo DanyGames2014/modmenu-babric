@@ -3,6 +3,7 @@ package net.danygames2014.modmenu.mixin;
 import net.danygames2014.modmenu.ModMenu;
 import net.danygames2014.modmenu.api.ModMenuApi;
 import net.danygames2014.modmenu.config.ModMenuConfig;
+import net.danygames2014.modmenu.event.ModMenuEventHandler;
 import net.danygames2014.modmenu.gui.ModsScreen;
 import net.danygames2014.modmenu.gui.widget.ModMenuButtonWidget;
 
@@ -21,6 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinGameMenu extends Screen {
 	/** button id for Options... button */
 	private static final int OPTIONS = 0;
+	/** button id for Quit Game... button */
+	private static final int QUIT = 1;
 	/** button id for gui.achievements button */
 	private static final int ACHIEVEMENTS = 5;
 	/** button id for gui.stats button */
@@ -38,30 +41,52 @@ public abstract class MixinGameMenu extends Screen {
 			int modsButtonY = -1;
 			int modsButtonWidth = -1;
 			int modsButtonHeight = 20;
+			int texturepackX = -1;
+			int texturepackY = -1;
 			for (int i = 0; i < this.buttons.size(); i++) {
 				final ButtonWidget button = (ButtonWidget) this.buttons.get(i);
-				if (style == ModMenuConfig.GameMenuButtonStyle.BELOW_ACHIEVEMENTS && button.id == ACHIEVEMENTS) {
-					modsButtonX = button.x;
-					modsButtonWidth = button.width;
+				if (style == ModMenuConfig.GameMenuButtonStyle.BELOW_ACHIEVEMENTS) {
+					if(button.id == ACHIEVEMENTS) {
+						modsButtonX = button.x;
+						modsButtonWidth = button.width;
+					} else if(button.id == STATS) {
+						texturepackX = button.x;
+					}
+				} else if (style == ModMenuConfig.GameMenuButtonStyle.BELOW_STATISTICS) {
+					if(button.id == STATS) {
+						modsButtonX = button.x;
+						modsButtonWidth = button.width;
+					} else if(button.id == ACHIEVEMENTS) {
+						texturepackX = button.x;
+					}
 				}
-				if (style == ModMenuConfig.GameMenuButtonStyle.BELOW_STATISTICS && button.id == STATS) {
-					modsButtonX = button.x;
-					modsButtonWidth = button.width;
-				}
+
 				if (style == ModMenuConfig.GameMenuButtonStyle.BELOW_ACHIEVEMENTS_AND_STATISTICS && button.id == ACHIEVEMENTS) {
 					modsButtonX = button.x;
+					texturepackX = modsButtonX;
 					modsButtonWidth = 2 * button.width + spacing;
 				}
 				if (style == ModMenuConfig.GameMenuButtonStyle.ICON && button.id == STATS) {
 					modsButtonX = button.x + (button.width + spacing);
 					modsButtonWidth = modsButtonHeight;
 				}
+
+				if(style == ModMenuConfig.GameMenuButtonStyle.BELOW_ACHIEVEMENTS_AND_STATISTICS && (button.id == OPTIONS || button.id == QUIT)) {
+					ModMenuEventHandler.shiftButtons(button, false, 48);
+				}
+
 				if (button.id == OPTIONS) {
 					modsButtonIndex = i + 1;
-					if (style == ModMenuConfig.GameMenuButtonStyle.ICON) {
-						modsButtonY = button.y;
+					if(style == ModMenuConfig.GameMenuButtonStyle.BELOW_ACHIEVEMENTS_AND_STATISTICS) {
+						modsButtonY = button.y - ((spacing + modsButtonHeight) * 2);
+						texturepackY = modsButtonY + spacing + modsButtonHeight;
 					} else {
-						modsButtonY = button.y - spacing - modsButtonHeight;
+						if(style == ModMenuConfig.GameMenuButtonStyle.ICON) {
+							modsButtonY = button.y;
+						} else {
+							modsButtonY = button.y - spacing - modsButtonHeight;
+						}
+						texturepackY = modsButtonY;
 					}
 				}
 			}
@@ -71,11 +96,7 @@ public abstract class MixinGameMenu extends Screen {
 					this.buttons.add(new ButtonWidget(MODS + 1, this.width / 2 - 100, this.height / 4 + 56, TranslationStorage.getInstance().get("menu.mods")));
 				} else {
 					this.buttons.add(new ModMenuButtonWidget(MODS, modsButtonX, modsButtonY, modsButtonWidth, modsButtonHeight, ModMenuApi.createModsButtonText()));
-					if(style == ModMenuConfig.GameMenuButtonStyle.BELOW_ACHIEVEMENTS) {
-						this.buttons.add(new ButtonWidget(MODS + 1, this.width / 2 + 2, modsButtonY, modsButtonWidth, modsButtonHeight, TranslationStorage.getInstance().get("menu.mods")));
-					} else if(style == ModMenuConfig.GameMenuButtonStyle.BELOW_STATISTICS) {
-						this.buttons.add(new ButtonWidget(MODS + 1, this.width / 2 - 100, modsButtonY, modsButtonWidth, modsButtonHeight, TranslationStorage.getInstance().get("menu.mods")));
-					}
+					this.buttons.add(new ButtonWidget(MODS + 1, texturepackX, texturepackY, modsButtonWidth, modsButtonHeight, TranslationStorage.getInstance().get("menu.mods")));
 				}
 			}
 		}
