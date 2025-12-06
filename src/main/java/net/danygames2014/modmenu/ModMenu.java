@@ -4,6 +4,7 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import farn.modmenu.LegacyModMenuImpl;
 import net.danygames2014.modmenu.api.ConfigScreenFactory;
 import net.danygames2014.modmenu.api.ModMenuApi;
 import net.danygames2014.modmenu.config.ModMenuConfig;
@@ -65,14 +66,20 @@ public class ModMenu implements ClientModInitializer {
 		ModMenuConfigManager.initializeConfig();
 		Set<String> modpackMods = new HashSet<>();
 
-		FabricLoader.getInstance().getEntrypointContainers("modmenu", ModMenuApi.class).forEach(entrypoint -> {
+		FabricLoader.getInstance().getEntrypointContainers("modmenu", Object.class).forEach(entrypoint -> {
 			ModMetadata metadata = entrypoint.getProvider().getMetadata();
 			String modId = metadata.getId();
 			try {
-				ModMenuApi api = entrypoint.getEntrypoint();
-				configScreenFactories.put(modId, api.getModConfigScreenFactory());
-				apiImplementations.add(api);
-				api.attachModpackBadges(modpackMods::add);
+				if(entrypoint.getEntrypoint() instanceof ModMenuApi api) {
+					configScreenFactories.put(modId, api.getModConfigScreenFactory());
+					apiImplementations.add(api);
+					api.attachModpackBadges(modpackMods::add);
+				} else if(entrypoint.getEntrypoint() instanceof io.github.prospector.modmenu.api.ModMenuApi api2) {
+					ModMenuApi newApi = new LegacyModMenuImpl(api2);
+					configScreenFactories.put(modId, newApi.getModConfigScreenFactory());
+					apiImplementations.add(newApi);
+					newApi.attachModpackBadges(modpackMods::add);
+				}
 			} catch (Throwable e) {
 				LOGGER.error("Mod {} provides a broken implementation of ModMenuApi", modId, e);
 			}

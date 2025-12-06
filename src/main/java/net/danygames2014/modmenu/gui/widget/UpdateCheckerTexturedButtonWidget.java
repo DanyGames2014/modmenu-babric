@@ -1,7 +1,5 @@
 package net.danygames2014.modmenu.gui.widget;
 
-import net.danygames2014.modmenu.ModMenu;
-import net.danygames2014.modmenu.config.ModMenuConfig;
 import net.minecraft.client.Minecraft;
 
 public class UpdateCheckerTexturedButtonWidget extends TexturedButtonWidget {
