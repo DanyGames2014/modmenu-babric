@@ -1,8 +1,10 @@
-package farn.modmenu;
+package net.danygames2014.modmenu.api.impl;
 
 import net.danygames2014.modmenu.api.ConfigScreenFactory;
 import net.danygames2014.modmenu.api.ModMenuApi;
 import net.minecraft.client.gui.screen.Screen;
+
+/* Made by Farn (farnfarn02) */
 
 public class LegacyModMenuImpl implements ModMenuApi {
     private io.github.prospector.modmenu.api.ModMenuApi ogApi;

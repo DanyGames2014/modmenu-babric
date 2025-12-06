@@ -4,7 +4,7 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import farn.modmenu.LegacyModMenuImpl;
+import net.danygames2014.modmenu.api.impl.LegacyModMenuImpl;
 import net.danygames2014.modmenu.api.ConfigScreenFactory;
 import net.danygames2014.modmenu.api.ModMenuApi;
 import net.danygames2014.modmenu.config.ModMenuConfig;
