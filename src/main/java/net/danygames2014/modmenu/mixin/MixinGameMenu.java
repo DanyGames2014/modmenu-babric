@@ -7,7 +7,7 @@ import net.danygames2014.modmenu.event.ModMenuEventHandler;
 import net.danygames2014.modmenu.gui.ModsScreen;
 import net.danygames2014.modmenu.gui.widget.ModMenuButtonWidget;
 
-import net.danygames2014.modmenu.gui.widget.UpdateCheckerTexturedButtonWidget;
+import net.danygames2014.modmenu.gui.widget.TexturedButtonWidget;
 import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.pack.PackScreen;
@@ -92,7 +92,7 @@ public abstract class MixinGameMenu extends Screen {
 			}
 			if (modsButtonIndex != -1) {
 				if (style == ModMenuConfig.GameMenuButtonStyle.ICON) {
-					this.buttons.add(new UpdateCheckerTexturedButtonWidget(MODS, modsButtonX, modsButtonY, modsButtonWidth, modsButtonHeight, 0, 0, 20, FABRIC_ICON_BUTTON_LOCATION, 32, 64));
+					this.buttons.add(new TexturedButtonWidget(MODS, modsButtonX, modsButtonY, modsButtonWidth, modsButtonHeight, 0, 0, 20, FABRIC_ICON_BUTTON_LOCATION, 32, 64));
 					this.buttons.add(new ButtonWidget(MODS + 1, this.width / 2 - 100, this.height / 4 + 56, TranslationStorage.getInstance().get("menu.mods")));
 				} else {
 					this.buttons.add(new ModMenuButtonWidget(MODS, modsButtonX, modsButtonY, modsButtonWidth, modsButtonHeight, ModMenuApi.createModsButtonText()));

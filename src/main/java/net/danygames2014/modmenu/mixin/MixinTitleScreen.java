@@ -6,7 +6,7 @@ import net.danygames2014.modmenu.config.ModMenuConfig;
 import net.danygames2014.modmenu.event.ModMenuEventHandler;
 import net.danygames2014.modmenu.gui.ModsScreen;
 import net.danygames2014.modmenu.gui.widget.ModMenuButtonWidget;
-import net.danygames2014.modmenu.gui.widget.UpdateCheckerTexturedButtonWidget;
+import net.danygames2014.modmenu.gui.widget.TexturedButtonWidget;
 import net.danygames2014.modmenu.util.TranslationUtil;
 
 import net.minecraft.client.gui.screen.Screen;
@@ -63,7 +63,7 @@ public abstract class MixinTitleScreen extends Screen {
 				} else if (ModMenuConfig.MODS_BUTTON_STYLE.getValue() == ModMenuConfig.TitleMenuButtonStyle.SHRINK) {
 					this.buttons.add(new ModMenuButtonWidget(MODS, this.width / 2 + 2, buttonsY, 98, 20, ModMenuApi.createModsButtonText()));
 				} else if (ModMenuConfig.MODS_BUTTON_STYLE.getValue() == ModMenuConfig.TitleMenuButtonStyle.ICON) {
-					this.buttons.add(new UpdateCheckerTexturedButtonWidget(MODS, this.width / 2 + 104, buttonsY, 20, 20, 0, 0, 20, FABRIC_ICON_BUTTON_LOCATION, 32, 64));
+					this.buttons.add(new TexturedButtonWidget(MODS, this.width / 2 + 104, buttonsY, 20, 20, 0, 0, 20, FABRIC_ICON_BUTTON_LOCATION, 32, 64));
 				}
 			}
 		}
