@@ -9,15 +9,18 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 import net.danygames2014.modmenu.util.TextRendererHelper;
+import org.spongepowered.asm.mixin.Unique;
 
+@SuppressWarnings("AddedMixinMembersNamePattern")
 @Mixin(TextRenderer.class)
 public class MixinTextRenderer implements TextRendererHelper {
 
 	@Shadow private int[] characterWidths;
 
+    @Unique
 	@Override
 	public int getWidth(char chr) {
-		if (chr == '\u00a7') {
+		if (chr == '§') {
 			return -1;
 		}
 		int index = CharacterUtils.VALID_CHARACTERS.indexOf(chr);
@@ -27,11 +30,13 @@ public class MixinTextRenderer implements TextRendererHelper {
 		return 0;
 	}
 
+    @Unique
 	@Override
 	public String trim(String text, int width) {
 		return this.trim(text, width, false);
 	}
 
+    @Unique
 	@Override
 	public String trim(String text, int width, boolean inverse) {
 		StringBuilder sb = new StringBuilder();
@@ -69,11 +74,13 @@ public class MixinTextRenderer implements TextRendererHelper {
 		return sb.toString();
 	}
 
+    @Unique
 	@Override
 	public List<String> split(String text, int width) {
 		return Arrays.asList(this.insertLineBreaks(text, width).split("\n"));
 	}
 
+    @Unique
 	@Override
 	public String insertLineBreaks(String text, int width) {
 		int n = this.indexAtWidth(text, width);
@@ -85,6 +92,7 @@ public class MixinTextRenderer implements TextRendererHelper {
 		return string + "\n" + this.insertLineBreaks(string2, width);
 	}
 
+    @Unique
 	@Override
 	public int indexAtWidth(String text, int width) {
 		int n;
@@ -95,7 +103,7 @@ public class MixinTextRenderer implements TextRendererHelper {
 		for (n = 0; n < n2; ++n) {
 			char c = text.charAt(n);
 			switch (c) {
-			case '\u00a7': {
+			case '§': {
 				char c2;
 				if (n == n2)
 					break;

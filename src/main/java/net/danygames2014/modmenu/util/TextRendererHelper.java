@@ -28,15 +28,15 @@ public interface TextRendererHelper {
 		throw new UnsupportedOperationException();
 	}
 
-	public static boolean isColor(char chr) {
+	static boolean isColor(char chr) {
 		return chr >= '0' && chr <= '9' || chr >= 'a' && chr <= 'f' || chr >= 'A' && chr <= 'F';
 	}
 
-	public static boolean isFormatting(char chr) {
+	static boolean isFormatting(char chr) {
 		return chr >= 'k' && chr <= 'o' || chr >= 'K' && chr <= 'O' || chr == 'r' || chr == 'R';
 	}
 
-	public static String isolateFormatting(String text) {
+	static String isolateFormatting(String text) {
 		String string = "";
 		int n = -1;
 		int n2 = text.length();
