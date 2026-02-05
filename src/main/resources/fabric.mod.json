@@ -95,6 +95,9 @@
     ],
     "modmenu": [
       "net.danygames2014.modmenu.ModMenuModMenuCompat"
+    ],
+    "modmenu-gcapi": [
+      "net.danygames2014.modmenu.GlassConfigModMenuCompat"
     ]
   },
   "accessWidener": "modmenu.accesswidener",

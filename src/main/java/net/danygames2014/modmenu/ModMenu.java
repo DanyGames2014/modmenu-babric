@@ -85,6 +85,23 @@ public class ModMenu implements ClientModInitializer {
 			}
 		});
 
+		if (FabricLoader.getInstance().isModLoaded("gcapi3")) {
+			FabricLoader.getInstance().getEntrypointContainers("modmenu-gcapi", Object.class).forEach(entrypoint -> {
+				ModMetadata metadata = entrypoint.getProvider().getMetadata();
+				String modId = metadata.getId();
+				try {
+					if(entrypoint.getEntrypoint() instanceof ModMenuApi api) {
+						configScreenFactories.putAll(api.getProvidedConfigScreenFactories());
+						apiImplementations.add(api);
+						api.attachModpackBadges(modpackMods::add);
+					}
+				} catch (Throwable e) {
+					LOGGER.error("Mod {} provides a broken implementation of ModMenuApi", modId, e);
+				}
+			});
+		}
+		
+
 		// Fill mods map
 		for (ModContainer modContainer : FabricLoader.getInstance().getAllMods()) {
 			Mod mod;
