@@ -107,7 +107,7 @@
   },
   "custom": {
     "loom:injected_interfaces": {
-      "net/minecraft/class_34": [
+      "net/minecraft/unmapped/C_23014920": [
         "net/danygames2014/modmenu/util/TextRendererHelper"
       ]
     }
