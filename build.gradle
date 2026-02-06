@@ -87,7 +87,7 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings(ploceus.mappings("net.glasslauncher:biny-ornithe:b1.7.3+build.${project.biny_mappings}:mergedv2"))
+    mappings(ploceus.mappings("net.glasslauncher:biny-ornithe:${project.biny_mappings}:mergedv2"))
 
     exceptions ploceus.raven(project.raven_build)
     signatures ploceus.sparrow(project.sparrow_build)
@@ -297,7 +297,7 @@ tasks.register("update") {
 
         List<String> lines = propsFile.readLines()
 
-        updateDependency(lines, "BINY", "yarn_mappings", "https://maven.glass-launcher.net/releases/net/glasslauncher/biny")
+        updateDependency(lines, "BINY", "biny_mappings", "https://maven.glass-launcher.net/releases/net/glasslauncher/biny-ornithe")
         updateDependency(lines, "Fabric Loader", "loader_version", "https://maven.fabricmc.net/net/fabricmc/fabric-loader/")
         updateDependency(lines, "StationAPI", "stapi_version", "https://maven.glass-launcher.net/releases/net/modificationstation/StationAPI")
         updateDependency(lines, "Glass Networking", "glass_networking_version", "https://maven.glass-launcher.net/releases/net/glasslauncher/mods/glass-networking")
