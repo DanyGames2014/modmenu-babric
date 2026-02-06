@@ -20,6 +20,8 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+    
+    withSourcesJar()
 }
 
 loom {
@@ -31,30 +33,21 @@ loom {
     }
 }
 repositories {
-    // Used for Babric Loom Extensions
-//    maven {
-//        name = "Babric"
-//        url = "https://maven.glass-launcher.net/babric"
-//    }
-
     maven { 
         name = "Casa De Periut"
         url = "https://matthewperiut.github.io/repository" 
     }
     
-    // Used for many dependencies
     maven {
         name = "Glass Releases"
         url = "https://maven.glass-launcher.net/releases"
     }
 
-    // Used for Snapshots
     maven {
         name = "Glass Snapshots"
         url = "https://maven.glass-launcher.net/snapshots"
     }
 
-    // NyaRepo
     maven {
         name = "NyaRepo"
         url = "https://maven.fildand.cz/releases"
@@ -64,19 +57,12 @@ repositories {
         name = "Ornithe Releases"
         url = "https://maven.ornithemc.net/releases" 
     }
-
-//    maven {
-//        name = "Devos Maven"
-//        url = 'https://mvn.devos.one/releases' 
-//    }
     
-    // Used for a StationAPI dependency.
     maven {
         name = "Froge Maven"
         url = "https://maven.minecraftforge.net/"
     }
 
-    // Used for projects that do not have a maven repository, but do have a GitHub repository with working build scripts.
     maven {
         name = "Jitpack"
         url = "https://jitpack.io"
@@ -103,12 +89,10 @@ dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings(ploceus.mappings("net.glasslauncher:biny-ornithe:b1.7.3+build.${project.biny_mappings}:mergedv2"))
 
-	clientExceptions ploceus.raven(project.client_raven_build, 'client')
-	serverExceptions ploceus.raven(project.server_raven_build, 'server')
-	clientSignatures ploceus.sparrow(project.client_sparrow_build, 'client')
-	serverSignatures ploceus.sparrow(project.server_sparrow_build, 'server')
-	clientNests("net.glasslauncher:biny-nests:b1.7.3-client+build.2")
-	serverNests("net.glasslauncher:biny-nests:b1.7.3-server+build.2")
+    exceptions ploceus.raven(project.raven_build)
+    signatures ploceus.sparrow(project.sparrow_build)
+	clientNests("net.glasslauncher:biny-nests:b1.7.3-client+build.${project.nests_build}")
+	serverNests("net.glasslauncher:biny-nests:b1.7.3-server+build.${project.nests_build}")
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     implementation "org.slf4j:slf4j-api:1.8.0-beta4"
@@ -130,12 +114,6 @@ dependencies {
 
 //    if (project.hasProperty("modmenu_version")) {
 //        modImplementation("net.danygames2014:modmenu:${project.modmenu_version}") {
-//            transitive = false
-//        }
-//    }
-
-//    if (project.hasProperty("glass_networking_version")) {
-//        modImplementation("net.glasslauncher.mods:glass-networking:${project.glass_networking_version}") {
 //            transitive = false
 //        }
 //    }
@@ -208,7 +186,7 @@ dependencies {
 //        }
 //    }
 
-//     modRuntimeOnly("maven.modrinth:fast-stapi-intro:2.0.0-b1.7.3") {
+//     modRuntimeOnly("maven.modrinth:stationapis-no-startup-screen:3.0-b1.7.3") {
 //     transitive = false
 //     }
 }
@@ -237,10 +215,6 @@ tasks.withType(GenerateModuleMetadata).configureEach {
 // Gradle 9 fails the build if there are no tests, but we are using the test package for a test mod
 tasks.withType(Test).configureEach {
     failOnNoDiscoveredTests = false
-}
-
-java {
-    withSourcesJar()
 }
 
 jar {
